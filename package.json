@@ -1,0 +1,49 @@
+{
+  "name": "action-run",
+  "description": "Run node.js GitHub Actions locally",
+  "version": "0.1.1",
+  "author": "Michael Heap <m@michaelheap.com>",
+  "bin": {
+    "action-run": "./bin/run"
+  },
+  "bugs": "https://github.com/mheap/action-run/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.14.0",
+    "@oclif/plugin-help": "^2.2.3",
+    "actions-toolkit": "^3.0.1",
+    "cli-ux": "^5.4.5",
+    "tmp": "^0.1.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "homepage": "https://github.com/mheap/action-run",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "bin": "action-run"
+  },
+  "repository": "mheap/action-run",
+  "scripts": {
+    "posttest": "eslint .",
+    "lint-fix": "eslint --fix .",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
