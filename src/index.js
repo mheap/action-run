@@ -1,6 +1,5 @@
 const { Command, flags } = require("@oclif/command");
 const { cli } = require("cli-ux");
-const { Toolkit } = require("actions-toolkit");
 const path = require("path");
 const fs = require("fs");
 var tmp = require("tmp");
@@ -77,19 +76,17 @@ class ActionRunCommand extends Command {
     const actionPath = path.resolve(process.cwd(), args.action);
 
     // If our action exposes a function, capture it to run later
+    // At this point, it could execute the action directly, or return a module.exports function
     let action = require(actionPath);
 
-    if (action) {
+    // If it returned a function, run it
+    if (typeof action == "function") {
       return await action();
     }
 
-    // Otherwise we assume it's an actions-toolkit action
-    Toolkit.run = actionFn => {
-      action = actionFn;
-    };
+    console.log("No action found. Did you add your action to module.exports?")
+    process.exit(1);
 
-    const tools = new Toolkit();
-    return await action(tools);
   }
 }
 
