@@ -1,7 +1,7 @@
 {
   "name": "action-run",
   "description": "Run node.js GitHub Actions locally",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Michael Heap <m@michaelheap.com>",
   "bin": {
     "action-run": "./bin/run"
