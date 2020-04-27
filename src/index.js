@@ -10,15 +10,6 @@ class ActionRunCommand extends Command {
     const { args } = this.parse(ActionRunCommand);
     const { flags } = this.parse(ActionRunCommand);
 
-    // Make the event path optional. Not all actions use it
-    let usingGeneratedEvent = false;
-    if (!process.env.GITHUB_EVENT_PATH) {
-      const tmpobj = tmp.fileSync();
-      fs.writeFileSync(tmpobj.name, "{}");
-      flags.event_path = tmpobj.name;
-      usingGeneratedEvent = true;
-    }
-
     // Use our flags to set environment variables which are read by the toolkit
     Object.assign(process.env, {
       GITHUB_WORKFLOW: flags.workflow,
@@ -30,6 +21,15 @@ class ActionRunCommand extends Command {
       GITHUB_WORKSPACE: flags.workspace,
       GITHUB_SHA: flags.sha
     });
+
+    // Make the event path optional. Not all actions use it
+    let usingGeneratedEvent = false;
+    if (!process.env.GITHUB_EVENT_PATH) {
+      const tmpobj = tmp.fileSync();
+      fs.writeFileSync(tmpobj.name, "{}");
+      flags.event_path = tmpobj.name;
+      usingGeneratedEvent = true;
+    }
 
     // Add any inputs
     if (flags.input) {
@@ -83,10 +83,6 @@ class ActionRunCommand extends Command {
     if (typeof action == "function") {
       return await action();
     }
-
-    console.log("No action found. Did you add your action to module.exports?")
-    process.exit(1);
-
   }
 }
 
