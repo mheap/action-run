@@ -97,4 +97,3 @@ OPTIONS
   -w, --workflow=workflow      [default: Toolkit Demo Workflow] Workflow name
   --debug                      Show the current configuration
 ```
-
